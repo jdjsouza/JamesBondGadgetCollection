@@ -94,8 +94,6 @@ namespace JamesBondGadgetCollection.Data
             {
                 string sqlQuery = "INSERT INTO dbo.Gadgets VALUES (@Name, @Description, @AppearsIn, @WithThisActor)";
 
-                // associate @id with Id parameter
-
                 SqlCommand command = new SqlCommand(sqlQuery, connection);
 
                 command.Parameters.Add("@Name", System.Data.SqlDbType.VarChar, 1000).Value = gadgetModel.Name;
@@ -104,26 +102,10 @@ namespace JamesBondGadgetCollection.Data
                 command.Parameters.Add("@WithThisActor", System.Data.SqlDbType.VarChar, 1000).Value = gadgetModel.WithThisActor;
 
                 connection.Open();
-                SqlDataReader reader = command.ExecuteReader();
-
-                GadgetModel gadget = new GadgetModel();
-
-                if (reader.HasRows)
-                {
-                    while (reader.Read())
-                    {
-                        // create a new gadget object. Add it to the list to return.
-
-                        gadget.Id = reader.GetInt32(0);
-                        gadget.Name = reader.GetString(1);
-                        gadget.Description = reader.GetString(2);
-                        gadget.AppearsIn = reader.GetString(3);
-                        gadget.WithThisActor = reader.GetString(4);
-
-
-                    }
-                }
-                return gadget;
+                int newID = command.ExecuteNonQuery();
+                
+                
+                return newID;
             }
 
         }
