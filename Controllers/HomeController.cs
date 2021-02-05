@@ -24,7 +24,7 @@ namespace JamesBondGadgetCollection.Controllers
         {
             ViewBag.Message = "Your contact page.";
 
-            return View();
+            return View("ContactUs");
         }
     }
 }
