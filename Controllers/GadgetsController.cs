@@ -39,8 +39,17 @@ namespace JamesBondGadgetCollection.Controllers
         public ActionResult Edit(int id)
         {
             GadgetDAO gadgetDAO = new GadgetDAO();
-            GadgetModel gadget = gadgetDAO.FetchOne(id);
-            return View("GadgetForm", gadget);
+            GadgetModel gadgets = gadgetDAO.FetchOne(id);
+            return View("GadgetForm", gadgets);
+        }
+
+        public ActionResult Delete(int id)
+        {
+            GadgetDAO gadgetDAO = new GadgetDAO();
+            gadgetDAO.Delete(id);
+
+            List<GadgetModel> gadgets = gadgetDAO.FetchAll();
+            return View("Index", gadgets);
         }
 
         public ActionResult ProcessCreate(GadgetModel gadgetModel)
