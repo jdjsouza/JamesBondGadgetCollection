@@ -62,5 +62,30 @@ namespace JamesBondGadgetCollection.Controllers
 
             return View("Details", gadgetModel);
         }
+
+        public ActionResult SearchForm()
+        {
+            return View("SearchForm");
+        }
+
+        public ActionResult SearchForName(string searchPhrase)
+        {
+            // get a list of search results from the database
+
+            GadgetDAO gadgetDAO = new GadgetDAO();
+            List<GadgetModel> searchResults = gadgetDAO.SearchForName(searchPhrase);
+
+            return View("Index", searchResults);
+        }
+
+        public ActionResult SearchForDescription(string searchPhrase)
+        {
+            // get a list of search results from the database
+
+            GadgetDAO gadgetDAO = new GadgetDAO();
+            List<GadgetModel> searchResults = gadgetDAO.SearchForDescription(searchPhrase);
+
+            return View("Index", searchResults);
+        }
     }
 }
